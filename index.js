@@ -21,12 +21,21 @@ router.post('/divide', (req, res) => {
 });
 
 router.get('/ns/:lim', (req, res) => {
-	var x = req.params.lim;
+	var x = parseInt(req.params.lim);
 	var y = ((x) * (x + 1)) / 2;
 	res.json({sum_till_n: y});
 });
 
 
+router.put('/insert', (req, res) => {
+	var {list, to_insert}  = req.body;
+	if(list[list.length - 1] % 2 == 0) {
+	    list.push(to_insert);
+    }
+	res.json({new_list: list});
+});
+
+
 
 app.use('/api/v1/testing/', router);
-app.listen(8081, () => {console.log("server started");});
+app.listen(8081, () => {console.log("server started on port 8081. You can access it via http://localhost:8081/");});
